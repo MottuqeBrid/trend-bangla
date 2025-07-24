@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   FiUser,
   FiMail,
@@ -13,8 +14,6 @@ import {
   FiCheck,
 } from "react-icons/fi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-import { HiOutlineUserAdd } from "react-icons/hi";
-import Logo from "@/components/Logo/Logo";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -130,27 +129,43 @@ const RegisterPage = () => {
   const passwordStrength = getPasswordStrength();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200 py-12 px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen flex items-center justify-center bg-base-200 pt-20 pb-12 px-4 sm:px-6 lg:px-8"
+    >
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
-        <div className="text-center">
-          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-secondary/10 mb-6">
-            {/* <HiOutlineUserAdd className="h-8 w-8 text-secondary" /> */}
-            <Logo />
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-center"
+        >
           <h1 className="text-3xl font-bold text-base-content">
             Create Account
           </h1>
           <p className="mt-2 text-sm text-base-content/60">
             Join us today and start your journey
           </p>
-        </div>
+        </motion.div>
 
         {/* Register Form */}
-        <div className="bg-base-100 rounded-2xl shadow-xl p-8">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="bg-base-100 rounded-2xl shadow-xl p-8"
+        >
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="grid grid-cols-2 gap-4"
+            >
               {/* First Name */}
               <div>
                 <label
@@ -216,10 +231,14 @@ const RegisterPage = () => {
                   </p>
                 )}
               </div>
-            </div>
+            </motion.div>
 
             {/* Email Field */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-base-content mb-2"
@@ -249,10 +268,14 @@ const RegisterPage = () => {
                   {errors.email}
                 </p>
               )}
-            </div>
+            </motion.div>
 
             {/* Password Field */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-base-content mb-2"
@@ -321,10 +344,14 @@ const RegisterPage = () => {
                   {errors.password}
                 </p>
               )}
-            </div>
+            </motion.div>
 
             {/* Confirm Password Field */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
               <label
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-base-content mb-2"
@@ -376,10 +403,14 @@ const RegisterPage = () => {
                   {errors.confirmPassword}
                 </p>
               )}
-            </div>
+            </motion.div>
 
             {/* Terms Agreement */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
               <div className="flex items-start">
                 <input
                   id="agreeToTerms"
@@ -417,34 +448,52 @@ const RegisterPage = () => {
                   {errors.agreeToTerms}
                 </p>
               )}
-            </div>
+            </motion.div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`btn btn-secondary w-full ${
-                isLoading ? "disabled" : ""
-              }`}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
             >
-              {isLoading ? (
-                <>
-                  <FiLoader className="h-5 w-5 mr-2 animate-spin" />
-                  <span>Creating Account...</span>
-                </>
-              ) : (
-                <>
-                  <FiUserPlus className="h-5 w-5 mr-2" />
-                  Create Account
-                </>
-              )}
-            </button>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`btn btn-primary w-full ${
+                  isLoading ? "disabled" : ""
+                }`}
+              >
+                {isLoading ? (
+                  <>
+                    <FiLoader className="h-5 w-5 mr-2 animate-spin" />
+                    <span>Creating Account...</span>
+                  </>
+                ) : (
+                  <>
+                    <FiUserPlus className="h-5 w-5 mr-2" />
+                    Create Account
+                  </>
+                )}
+              </button>
+            </motion.div>
 
             {/* Divider */}
-            <div className="divider">OR</div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              className="divider"
+            >
+              OR
+            </motion.div>
 
             {/* Social Login */}
-            <div className="grid grid-cols-2 gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.0 }}
+              className="grid grid-cols-2 gap-3"
+            >
               <button type="button" className="btn btn-outline btn-sm">
                 <FaGoogle className="h-4 w-4 mr-2 text-red-500" />
                 Google
@@ -453,11 +502,16 @@ const RegisterPage = () => {
                 <FaFacebook className="h-4 w-4 mr-2 text-blue-600" />
                 Facebook
               </button>
-            </div>
+            </motion.div>
           </form>
 
           {/* Login Link */}
-          <div className="mt-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+            className="mt-6 text-center"
+          >
             <p className="text-sm text-base-content/60">
               Already have an account?{" "}
               <Link
@@ -467,10 +521,10 @@ const RegisterPage = () => {
                 Sign in here
               </Link>
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

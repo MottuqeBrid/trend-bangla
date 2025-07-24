@@ -30,3 +30,7 @@
   --color-error: #dc2626; /* red-600 */
   --color-text: #e5e7eb; /* light text */
 }
+
+.active {
+  @apply text-accent;
+}

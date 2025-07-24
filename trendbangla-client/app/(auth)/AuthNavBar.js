@@ -1,16 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { FiMenu, FiX, FiHome, FiInfo, FiUsers } from "react-icons/fi";
-import { IoShirt } from "react-icons/io5";
-import { GiClothes, GiTShirt } from "react-icons/gi";
-import { FaChild } from "react-icons/fa";
-import Logo from "../Logo/Logo";
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/components/Logo/Logo";
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
+import { FiMenu, FiX, FiHome, FiInfo, FiShield } from "react-icons/fi";
+import { TiContacts } from "react-icons/ti";
 
-const NavBar = () => {
+const AuthNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -37,31 +35,22 @@ const NavBar = () => {
       icon: FiHome,
     },
     {
-      name: "Summer",
-      href: "/summer",
-      icon: IoShirt,
-    },
-    {
-      name: "Women",
-      href: "/women",
-      icon: GiClothes,
-    },
-    {
-      name: "Teen",
-      href: "/teen",
-      icon: GiTShirt,
-    },
-    {
-      name: "Kids",
-      href: "/kids",
-      icon: FaChild,
-    },
-    {
       name: "About",
       href: "/about",
       icon: FiInfo,
     },
+    {
+      name: "Privacy",
+      href: "/privacy",
+      icon: FiShield,
+    },
+    {
+      name: "Contact",
+      href: "/contact",
+      icon: TiContacts,
+    },
   ];
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -70,7 +59,7 @@ const NavBar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-base-100/90 backdrop-blur-md shadow-lg"
-          : "bg-base-100 shadow-sm"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,7 +74,7 @@ const NavBar = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -112,27 +101,13 @@ const NavBar = () => {
           </div>
 
           {/* Desktop Auth Buttons & Theme Toggle */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
             >
               <ThemeToggle />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                className="btn btn-primary rounded-xl text-white"
-                href="/login"
-              >
-                Login
-              </Link>
             </motion.div>
           </div>
 
@@ -142,7 +117,7 @@ const NavBar = () => {
             animate={{ opacity: 1, rotate: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-base-content hover:bg-base-200 transition-colors"
+            className="md:hidden p-2 rounded-lg text-base-content hover:bg-base-200 transition-colors"
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait">
@@ -179,7 +154,7 @@ const NavBar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden border-t border-base-200"
+              className="md:hidden border-t border-base-200"
             >
               <div className="py-4 space-y-2">
                 {/* Mobile Navigation Links */}
@@ -204,20 +179,14 @@ const NavBar = () => {
                   </motion.div>
                 ))}
 
-                {/* Mobile Auth & Theme */}
+                {/* Mobile Theme Toggle */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
-                  className="px-4 py-2 space-y-3"
+                  className="px-4 py-2"
                 >
                   <ThemeToggle />
-                  <Link
-                    className="btn btn-primary rounded-xl text-white w-full"
-                    href="/login"
-                  >
-                    Login
-                  </Link>
                 </motion.div>
               </div>
             </motion.div>
@@ -228,4 +197,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default AuthNavBar;

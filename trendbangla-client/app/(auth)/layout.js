@@ -1,9 +1,10 @@
-import NavBar from "@/components/Navbar/Navbar";
+import AuthNavBar from "./AuthNavBar";
 
 const HomeLayout = ({ children }) => {
   return (
-    <div>
-      <main>{children}</main>
+    <div className="">
+      <AuthNavBar />
+      <main className="">{children}</main>
     </div>
   );
 };

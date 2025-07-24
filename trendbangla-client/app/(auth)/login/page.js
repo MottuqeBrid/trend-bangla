@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
-  FiUser,
   FiMail,
   FiLock,
   FiEye,
@@ -12,8 +12,6 @@ import {
   FiLoader,
 } from "react-icons/fi";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-import { HiOutlineUserCircle } from "react-icons/hi";
-import Logo from "@/components/Logo/Logo";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -46,10 +44,6 @@ const LoginPage = () => {
       }));
     }
   };
-
-  // const handleCheckboxChange = (e) => {
-  //   console.log(e.target.name);
-  // };
 
   const validateForm = () => {
     const newErrors = {};
@@ -90,25 +84,40 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200 py-12 px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen flex items-center justify-center bg-base-200 pt-20 pb-12 px-4 sm:px-6 lg:px-8"
+    >
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
-        <div className="text-center">
-          <div className="mx-auto flex items-center justify-center h-fit p-4 rounded-3xl shadow w-fit  mb-6">
-            {/* <HiOutlineUserCircle className="h-8 w-8 text-primary" /> */}
-            <Logo />
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-center"
+        >
           <h1 className="text-3xl font-bold text-base-content">Welcome Back</h1>
           <p className="mt-2 text-sm text-base-content/60">
             Sign in to your account to continue
           </p>
-        </div>
+        </motion.div>
 
         {/* Login Form */}
-        <div className="bg-base-100 rounded-2xl shadow-xl p-8">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="bg-base-100 rounded-2xl shadow-xl p-8"
+        >
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-base-content mb-2"
@@ -136,10 +145,14 @@ const LoginPage = () => {
                   {errors.email}
                 </p>
               )}
-            </div>
+            </motion.div>
 
             {/* Password Field */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-base-content mb-2"
@@ -178,10 +191,15 @@ const LoginPage = () => {
                   {errors.password}
                 </p>
               )}
-            </div>
+            </motion.div>
 
             {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex items-center justify-between"
+            >
               <div className="flex items-center">
                 <input
                   name="rememberMe"
@@ -205,34 +223,52 @@ const LoginPage = () => {
                   Forgot your password?
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`btn btn-primary w-full ${
-                isLoading ? "disabled" : ""
-              }`}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
             >
-              {isLoading ? (
-                <>
-                  <FiLoader className="h-5 w-5 mr-2 animate-spin" />
-                  <span>Signing in...</span>
-                </>
-              ) : (
-                <>
-                  <FiLogIn className="h-5 w-5 mr-2" />
-                  Sign In
-                </>
-              )}
-            </button>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`btn btn-primary w-full ${
+                  isLoading ? "disabled" : ""
+                }`}
+              >
+                {isLoading ? (
+                  <>
+                    <FiLoader className="h-5 w-5 mr-2 animate-spin" />
+                    <span>Signing in...</span>
+                  </>
+                ) : (
+                  <>
+                    <FiLogIn className="h-5 w-5 mr-2" />
+                    Sign In
+                  </>
+                )}
+              </button>
+            </motion.div>
 
             {/* Divider */}
-            <div className="divider">OR</div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="divider"
+            >
+              OR
+            </motion.div>
 
             {/* Social Login */}
-            <div className="grid grid-cols-2 gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="grid grid-cols-2 gap-3"
+            >
               <button type="button" className="btn btn-outline btn-sm">
                 <FaGoogle className="h-4 w-4 mr-2 text-red-500" />
                 Google
@@ -241,11 +277,16 @@ const LoginPage = () => {
                 <FaFacebook className="h-4 w-4 mr-2 text-blue-600" />
                 Facebook
               </button>
-            </div>
+            </motion.div>
           </form>
 
           {/* Register Link */}
-          <div className="mt-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="mt-6 text-center"
+          >
             <p className="text-sm text-base-content/60">
               Don't have an account?{" "}
               <Link
@@ -255,10 +296,10 @@ const LoginPage = () => {
                 Create one now
               </Link>
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
